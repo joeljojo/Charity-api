@@ -21,6 +21,21 @@
     "no-plusplus": "off",
     "no-process-exit": "off",
     "class-methods-use-this": "off",
-    "import/newline-after-import": ["error", { "count": 1 }]
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "line": {
+          "markers": ["/"],
+          "exceptions": ["-", "+"]
+        },
+        "block": {
+          "markers": ["!"],
+          "exceptions": ["*"],
+          "balanced": true
+        }
+      }
+    ]
   }
 }
