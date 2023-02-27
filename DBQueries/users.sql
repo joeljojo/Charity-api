@@ -1,0 +1,7 @@
+CREATE TABLE USERS (
+	UserID varchar(255) NOT NULL PRIMARY KEY,
+	FirstName TEXT NOT NULL,
+	LastName TEXT NOT NULL,
+	Email TEXT NOT NULL,
+	Password varchar(255) NOT NULL
+);
