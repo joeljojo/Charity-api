@@ -43,4 +43,31 @@ const registerUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser };
+// Login route
+const userLogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    client.query(
+      `Select * from users where email= $1`,
+      [email],
+      (error, result) => {
+        if (error) throw error;
+        const storedPassword = result.rows[0].password;
+        const bool = bcrypt.compareSync(password, storedPassword);
+        if (bool === false) {
+          res.json({
+            status: false,
+            message: 'Incorrect Username or Password',
+          });
+        } else {
+          res.json({ status: true, message: 'Login Successfully' });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { registerUser, userLogin };
