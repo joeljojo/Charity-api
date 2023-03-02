@@ -1,13 +1,18 @@
-const express = require('express');
 const bcrypt = require('bcrypt');
 const { uuid } = require('uuidv4');
 const client = require('../Config/db');
 
-const router = express();
-
 // Register Controller
 const registerUser = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    isAdmin,
+    isDonor,
+    isChildrensHome,
+  } = req.body;
 
   // hash password using bcrypt
   const hash = bcrypt.hashSync(password, 10);
@@ -22,12 +27,15 @@ const registerUser = async (req, res) => {
       (error, result) => {
         if (error) throw error;
         if (result.rows.length > 0) {
-          client.query(`Insert into users values($1,$2,$3,$4,$5)`, [
+          client.query(`Insert into users values($1,$2,$3,$4,$5,$6,$7,$8)`, [
             userID,
             firstName,
             lastName,
             email,
             hash,
+            isAdmin,
+            isDonor,
+            isChildrensHome,
           ]);
           res.json({
             status: true,
@@ -61,7 +69,16 @@ const userLogin = async (req, res) => {
             message: 'Incorrect Username or Password',
           });
         } else {
-          res.json({ status: true, message: 'Login Successfully' });
+          res.json({
+            userID: result.rows[0].userid,
+            firstName: result.rows[0].firstname,
+            lastName: result.rows[0].lastname,
+            isAdmin: result.rows[0].isAdmin,
+            isDonor: result.rows[0].isDonor,
+            isChildrensHome: result.isChildrensHome,
+            status: true,
+            message: 'Login Successfully',
+          });
         }
       }
     );
