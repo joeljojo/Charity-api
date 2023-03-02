@@ -96,4 +96,41 @@ const userLogin = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, userLogin };
+// Request Controller
+const makeRequest = async (req, res) => {
+  const {
+    requestTitle,
+    requestDescription,
+    facilityName,
+    numberOfChildren,
+    location,
+    amountRequired,
+    isDonorApproved,
+    isAdminApproved,
+    childrensHomeId,
+  } = req.body;
+  // generate requestId randomly
+  const requestID = uuid();
+
+  try {
+    client.query(
+      `Insert into requests values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
+      [
+        requestID,
+        requestTitle,
+        requestDescription,
+        facilityName,
+        numberOfChildren,
+        location,
+        amountRequired,
+        isDonorApproved,
+        isAdminApproved,
+        childrensHomeId,
+      ]
+    );
+    res.json({ status: true, message: 'Request made successfully!' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+module.exports = { registerUser, userLogin, makeRequest };
