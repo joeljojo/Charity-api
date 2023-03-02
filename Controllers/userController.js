@@ -51,34 +51,43 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Login route
+// Login controller
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    // if email exists and compare passwords
     client.query(
       `Select * from users where email= $1`,
       [email],
       (error, result) => {
         if (error) throw error;
-        const storedPassword = result.rows[0].password;
-        const bool = bcrypt.compareSync(password, storedPassword);
-        if (bool === false) {
-          res.json({
-            status: false,
-            message: 'Incorrect Username or Password',
-          });
+        // password comparison
+        if (result.rows.length > 0) {
+          const storedPassword = result.rows[0].password;
+          const bool = bcrypt.compareSync(password, storedPassword);
+
+          // if passwords do not match
+          if (bool === false) {
+            res.json({
+              status: false,
+              message: 'Incorrect Password!',
+            });
+          } else {
+            // if passwords match
+            res.json({
+              userID: result.rows[0].userid,
+              firstName: result.rows[0].firstname,
+              lastName: result.rows[0].lastname,
+              isAdmin: result.rows[0].isadmin,
+              isDonor: result.rows[0].isdonaor,
+              isChildrensHome: result.rows[0].ischildrenshome,
+              message: 'Login Successfully',
+            });
+          }
         } else {
-          res.json({
-            userID: result.rows[0].userid,
-            firstName: result.rows[0].firstname,
-            lastName: result.rows[0].lastname,
-            isAdmin: result.rows[0].isAdmin,
-            isDonor: result.rows[0].isDonor,
-            isChildrensHome: result.isChildrensHome,
-            status: true,
-            message: 'Login Successfully',
-          });
+          // if email does not exist
+          res.json({ status: false, message: 'Incorrect email!' });
         }
       }
     );
