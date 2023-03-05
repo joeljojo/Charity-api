@@ -136,13 +136,30 @@ const makeRequest = async (req, res) => {
   }
 };
 
-// fetch requests controller
+// fetch admin requests controller
 const adminRequests = async (req, res) => {
   try {
     client.query(`Select * from requests`, (error, result) => {
       if (error) throw error;
       res.status(200).json(result.rows);
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// fetch donor requests
+const donorRequests = async (req, res) => {
+  const { donorId } = req.body;
+  try {
+    client.query(
+      `Select * from requests where isadminaproved = true and donorid =$1`,
+      [donorId],
+      (error, result) => {
+        if (error) throw error;
+        res.status(200).json(result.rows);
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -182,7 +199,7 @@ const myAllRequests = async (req, res) => {
   }
 };
 
-// Get Admin Approved requests
+// Get Admin Approved requests controller
 const myAdminApprovedRequests = async (req, res) => {
   const { userid } = req.body;
   try {
@@ -198,7 +215,8 @@ const myAdminApprovedRequests = async (req, res) => {
     console.log(error);
   }
 };
-// Get Admin Rejected Requests
+
+// Get Admin Rejected Requests controller
 const myAdminRejectedRequests = async (req, res) => {
   const { userid } = req.body;
   try {
@@ -214,7 +232,8 @@ const myAdminRejectedRequests = async (req, res) => {
     console.log(error);
   }
 };
-// Get Donor Approved requests
+
+// Get Donor Approved requests controller
 const myDonorApprovedRequests = async (req, res) => {
   const { userid } = req.body;
   try {
@@ -230,7 +249,8 @@ const myDonorApprovedRequests = async (req, res) => {
     console.log(error);
   }
 };
-// get Donor Rejected requests
+
+// get Donor Rejected requests controller
 const myDonorRejectedRequests = async (req, res) => {
   const { userid } = req.body;
   try {
@@ -257,4 +277,5 @@ module.exports = {
   myAdminRejectedRequests,
   myDonorApprovedRequests,
   myDonorRejectedRequests,
+  donorRequests,
 };

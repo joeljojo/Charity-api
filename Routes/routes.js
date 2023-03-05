@@ -23,4 +23,6 @@ router.get('/admin-rejected-requests', userControllers.myAdminRejectedRequests);
 router.get('/donor-approved-requests', userControllers.myDonorApprovedRequests);
 // get donor Approved Requests
 router.get('/donor-rejected-requests', userControllers.myDonorRejectedRequests);
+// get donor requests
+router.get('/donor-requests', userControllers.donorRequests);
 module.exports = router;
