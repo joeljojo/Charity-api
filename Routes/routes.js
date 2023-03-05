@@ -15,4 +15,12 @@ router.get('/admin-requests', userControllers.adminRequests);
 router.get('/donors', userControllers.getDonors);
 // get requests route
 router.get('/children-home-requests', userControllers.myAllRequests);
+// get admin Approved Requests
+router.get('/admin-approved-requests', userControllers.myAdminApprovedRequests);
+// get admin Rejected Requests
+router.get('/admin-rejected-requests', userControllers.myAdminRejectedRequests);
+// get donor Approved Requests
+router.get('/donor-approved-requests', userControllers.myDonorApprovedRequests);
+// get donor Approved Requests
+router.get('/donor-rejected-requests', userControllers.myDonorRejectedRequests);
 module.exports = router;

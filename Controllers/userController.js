@@ -181,6 +181,71 @@ const myAllRequests = async (req, res) => {
     console.log(error);
   }
 };
+
+// Get Admin Approved requests
+const myAdminApprovedRequests = async (req, res) => {
+  const { userid } = req.body;
+  try {
+    client.query(
+      `Select * from requests where isadminaproved = true and childrenshomeid = $1`,
+      [userid],
+      (error, result) => {
+        if (error) throw error;
+        res.status(200).json(result.rows);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+// Get Admin Rejected Requests
+const myAdminRejectedRequests = async (req, res) => {
+  const { userid } = req.body;
+  try {
+    client.query(
+      `Select * from requests where isadminaproved = false and childrenshomeid = $1`,
+      [userid],
+      (error, result) => {
+        if (error) throw error;
+        res.status(200).json(result.rows);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+// Get Donor Approved requests
+const myDonorApprovedRequests = async (req, res) => {
+  const { userid } = req.body;
+  try {
+    client.query(
+      `Select * from requests where isdonorapproved = true and childrenshomeid = $1`,
+      [userid],
+      (error, result) => {
+        if (error) throw error;
+        res.status(200).json(result.rows);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+// get Donor Rejected requests
+const myDonorRejectedRequests = async (req, res) => {
+  const { userid } = req.body;
+  try {
+    client.query(
+      `Select * from requests where isdonorapproved = false and childrenshomeid = $1`,
+      [userid],
+      (error, result) => {
+        if (error) throw error;
+        res.status(200).json(result.rows);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports = {
   registerUser,
   userLogin,
@@ -188,4 +253,8 @@ module.exports = {
   adminRequests,
   getDonors,
   myAllRequests,
+  myAdminApprovedRequests,
+  myAdminRejectedRequests,
+  myDonorApprovedRequests,
+  myDonorRejectedRequests,
 };
