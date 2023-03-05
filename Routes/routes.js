@@ -10,7 +10,7 @@ router.post('/login', userControllers.userLogin);
 // make request route
 router.post('/children-home-request', userControllers.makeRequest);
 // // fetch admin requests
-// router.get('/admin-requests', userControllers.adminRequests);
+router.get('/admin-requests', userControllers.adminRequests);
 // get donors route
 router.get('/donors', userControllers.getDonors);
 module.exports = router;
