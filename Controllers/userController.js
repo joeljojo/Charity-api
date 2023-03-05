@@ -96,7 +96,7 @@ const userLogin = async (req, res) => {
   }
 };
 
-// Request Controller
+// make Request Controller
 const makeRequest = async (req, res) => {
   const {
     requestTitle,
@@ -133,4 +133,23 @@ const makeRequest = async (req, res) => {
     console.log(error);
   }
 };
-module.exports = { registerUser, userLogin, makeRequest };
+
+// get donors controller
+const getDonors = async (req, res) => {
+  // select all donors
+  client.query(`Select * from users where isDonaor = true`, (error, result) => {
+    if (error) throw error;
+    res.status(200).json({
+      donorId: result.rows[0].userid,
+      firstName: result.rows[0].firstname,
+      lastName: result.rows[0].lastname,
+      email: result.rows[0].email,
+    });
+  });
+};
+module.exports = {
+  registerUser,
+  userLogin,
+  makeRequest,
+  getDonors,
+};
