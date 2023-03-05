@@ -108,13 +108,14 @@ const makeRequest = async (req, res) => {
     isDonorApproved,
     isAdminApproved,
     childrensHomeId,
+    donorId,
   } = req.body;
   // generate requestId randomly
   const requestID = uuid();
 
   try {
     client.query(
-      `Insert into requests values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
+      `Insert into requests values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
       [
         requestID,
         requestTitle,
@@ -126,6 +127,7 @@ const makeRequest = async (req, res) => {
         isDonorApproved,
         isAdminApproved,
         childrensHomeId,
+        donorId,
       ]
     );
     res.json({ status: true, message: 'Request made successfully!' });
@@ -146,6 +148,7 @@ const adminRequests = async (req, res) => {
       numberOfChildren: result.rows[0].numberofchildren,
       location: result.rows[0].location,
       amountRequired: result.rows[0].amountrequired,
+      donorId: result.rows[0].donorid,
     });
   });
 };

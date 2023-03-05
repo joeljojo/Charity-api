@@ -11,3 +11,8 @@ CREATE TABLE IF NOT EXISTS Requests(
 	childrensHomeId varchar(255) NOT NULL,
 	FOREIGN KEY(childrensHomeId) REFERENCES users(userid)	
 );
+
+-- Added DonorID column to requests table
+-- ALTER TABLE IF EXISTS Requests
+-- 	ADD COLUMN IF NOT EXISTS DonorId varchar(255) NOT NULL,
+-- 	ADD FOREIGN KEY(DonorId) REFERENCES users(userid);
