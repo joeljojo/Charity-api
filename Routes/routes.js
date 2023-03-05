@@ -13,4 +13,6 @@ router.post('/children-home-request', userControllers.makeRequest);
 router.get('/admin-requests', userControllers.adminRequests);
 // get donors route
 router.get('/donors', userControllers.getDonors);
+// get requests route
+router.get('/children-home-requests', userControllers.myAllRequests);
 module.exports = router;

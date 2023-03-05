@@ -138,33 +138,48 @@ const makeRequest = async (req, res) => {
 
 // fetch requests controller
 const adminRequests = async (req, res) => {
-  client.query(`Select * from requests`, (error, result) => {
-    if (error) throw error;
-    res.status(200).json({
-      requestID: result.rows[0].requestid,
-      requestTitle: result.rows[0].requesttitle,
-      requestDescription: result.rows[0].requestdescription,
-      facilityName: result.rows[0].facilityname,
-      numberOfChildren: result.rows[0].numberofchildren,
-      location: result.rows[0].location,
-      amountRequired: result.rows[0].amountrequired,
-      donorId: result.rows[0].donorid,
+  try {
+    client.query(`Select * from requests`, (error, result) => {
+      if (error) throw error;
+      res.status(200).json(result.rows);
     });
-  });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // get donors controller
 const getDonors = async (req, res) => {
   // select all donors
-  client.query(`Select * from users where isDonaor = true`, (error, result) => {
-    if (error) throw error;
-    res.status(200).json({
-      donorId: result.rows[0].userid,
-      firstName: result.rows[0].firstname,
-      lastName: result.rows[0].lastname,
-      email: result.rows[0].email,
-    });
-  });
+  try {
+    client.query(
+      `Select userid, firstname, lastname, email from users where isDonaor = true`,
+      (error, result) => {
+        if (error) throw error;
+        res.status(200).json(result.rows);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Get myRequests controller (requests made by childrens home)
+const myAllRequests = async (req, res) => {
+  const { userid } = req.body;
+
+  try {
+    client.query(
+      `Select * from requests where childrenshomeid = $1`,
+      [userid],
+      (error, result) => {
+        if (error) throw error;
+        res.status(200).json(result.rows);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 module.exports = {
   registerUser,
@@ -172,4 +187,5 @@ module.exports = {
   makeRequest,
   adminRequests,
   getDonors,
+  myAllRequests,
 };
