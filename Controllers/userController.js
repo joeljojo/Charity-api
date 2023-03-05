@@ -153,7 +153,7 @@ const donorRequests = async (req, res) => {
   const { donorId } = req.body;
   try {
     client.query(
-      `Select * from requests where isadminaproved = true and donorid =$1`,
+      `Select * from requests where isadminaproved = true and isdonorapproved = false and donorid =$1`,
       [donorId],
       (error, result) => {
         if (error) throw error;
@@ -255,7 +255,7 @@ const myDonorRejectedRequests = async (req, res) => {
   const { userid } = req.body;
   try {
     client.query(
-      `Select * from requests where isdonorapproved = false and childrenshomeid = $1`,
+      `Select * from requests where isadminaproved = true and isdonorapproved = false and childrenshomeid = $1`,
       [userid],
       (error, result) => {
         if (error) throw error;
