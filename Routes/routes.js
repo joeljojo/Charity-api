@@ -25,4 +25,8 @@ router.get('/donor-approved-requests', userControllers.myDonorApprovedRequests);
 router.get('/donor-rejected-requests', userControllers.myDonorRejectedRequests);
 // get donor requests
 router.get('/donor-requests', userControllers.donorRequests);
+// Admin approves requests route
+router.put('/admin-approve-request', userControllers.adminApprovesRequest);
+// Admin rejects request routes
+router.put('/admin-reject-request', userControllers.adminRejectsRequest);
 module.exports = router;

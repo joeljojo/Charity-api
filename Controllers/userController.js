@@ -266,6 +266,32 @@ const myDonorRejectedRequests = async (req, res) => {
     console.log(error);
   }
 };
+
+// Admin rejects controller (If admin rejects requests made by the ChildrensHome)
+const adminRejectsRequest = async (req, res) => {
+  const { requestId } = req.body;
+  try {
+    client.query(
+      `Update requests set isadminaproved = false where requestid=$1`,
+      [requestId]
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Admin Approves controller (If admin approves requests made by the ChildrensHome)
+const adminApprovesRequest = async (req, res) => {
+  const { requestId } = req.body;
+  try {
+    client.query(
+      `Update requests set isadminaproved = true where requestid=$1`,
+      [requestId]
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports = {
   registerUser,
   userLogin,
@@ -278,4 +304,6 @@ module.exports = {
   myDonorApprovedRequests,
   myDonorRejectedRequests,
   donorRequests,
+  adminApprovesRequest,
+  adminRejectsRequest,
 };
