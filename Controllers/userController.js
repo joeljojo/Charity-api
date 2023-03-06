@@ -275,6 +275,7 @@ const adminRejectsRequest = async (req, res) => {
       `Update requests set isadminaproved = false where requestid=$1`,
       [requestId]
     );
+    res.status(201).json({ message: 'Created' });
   } catch (error) {
     console.log(error);
   }
@@ -288,6 +289,35 @@ const adminApprovesRequest = async (req, res) => {
       `Update requests set isadminaproved = true where requestid=$1`,
       [requestId]
     );
+    res.status(201).json({ message: 'Created' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Donor Approves controller (If donor approves requests made by the ChildrensHome)
+const donorApprovesRequest = async (req, res) => {
+  const { requestId } = req.body;
+  try {
+    client.query(
+      `Update requests set isdonorapproved = true where requestid=$1`,
+      [requestId]
+    );
+    res.status(201).json({ message: 'Created' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Donor rejects controller (If donor rejects requests made by the ChildrensHome)
+const donorRejectsRequest = async (req, res) => {
+  const { requestId } = req.body;
+  try {
+    client.query(
+      `Update requests set isdonorapproved = false where requestid=$1`,
+      [requestId]
+    );
+    res.status(201).json({ message: 'Created' });
   } catch (error) {
     console.log(error);
   }
@@ -306,4 +336,6 @@ module.exports = {
   donorRequests,
   adminApprovesRequest,
   adminRejectsRequest,
+  donorApprovesRequest,
+  donorRejectsRequest,
 };

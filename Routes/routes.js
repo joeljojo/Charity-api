@@ -29,4 +29,8 @@ router.get('/donor-requests', userControllers.donorRequests);
 router.put('/admin-approve-request', userControllers.adminApprovesRequest);
 // Admin rejects request routes
 router.put('/admin-reject-request', userControllers.adminRejectsRequest);
+// Donor rejects request routes
+router.put('/donor-approve-request', userControllers.donorApprovesRequest);
+// Donor rejects request routes
+router.put('/donor-reject-request', userControllers.donorRejectsRequest);
 module.exports = router;
