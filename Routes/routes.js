@@ -1,5 +1,6 @@
 const express = require('express');
 const userControllers = require('../Controllers/userController');
+const mpesaControllers = require('../Controllers/lipanampesaController');
 
 const router = express.Router();
 
@@ -33,4 +34,8 @@ router.put('/admin-reject-request', userControllers.adminRejectsRequest);
 router.put('/donor-approve-request', userControllers.donorApprovesRequest);
 // Donor rejects request routes
 router.put('/donor-reject-request', userControllers.donorRejectsRequest);
+
+// MPESA ROUTES
+// authenticationToken Route
+router.get('/authentication-token', mpesaControllers.authenticationToken);
 module.exports = router;
