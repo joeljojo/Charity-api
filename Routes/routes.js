@@ -38,4 +38,13 @@ router.put('/donor-reject-request', userControllers.donorRejectsRequest);
 // MPESA ROUTES
 // authenticationToken Route
 router.get('/authentication-token', mpesaControllers.authenticationToken);
+// lipa-na-mpesa route
+router.post(
+  '/lipa-na-mpesa',
+  mpesaControllers.authenticationToken,
+  mpesaControllers.onlineLipaNaMpesa
+);
+
+// callback route
+router.post('/lipa-na-mpesa-callback', mpesaControllers.lipaNaMpesaCallback);
 module.exports = router;
