@@ -1,6 +1,6 @@
 const axios = require('axios');
 require('dotenv').config();
-const currentTimestamp = require('../Utils/timestamp');
+const { currentTimestamp } = require('../Utils/timestamp');
 
 class Mpesa {
   // Generate Authentication token
@@ -33,7 +33,8 @@ class Mpesa {
 
   // Lipanampesa Controller
   async onlineLipaNaMpesa(req, res) {
-    const { token, Amount } = req;
+    const { token } = req;
+    const { Amount } = req.body;
     const auth = `Bearer ${token}`;
 
     // get timestamp
