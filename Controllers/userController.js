@@ -71,23 +71,26 @@ const userLogin = async (req, res) => {
           if (bool === false) {
             res.json({
               status: false,
-              message: 'Incorrect Password!',
+              message: 'Invalid Username or Password!',
             });
           } else {
             // if passwords match
             res.json({
-              userID: result.rows[0].userid,
-              firstName: result.rows[0].firstname,
-              lastName: result.rows[0].lastname,
-              isAdmin: result.rows[0].isadmin,
-              isDonor: result.rows[0].isdonaor,
-              isChildrensHome: result.rows[0].ischildrenshome,
+              status: true,
+              user: {
+                userID: result.rows[0].userid,
+                firstName: result.rows[0].firstname,
+                lastName: result.rows[0].lastname,
+                isAdmin: result.rows[0].isadmin,
+                isDonor: result.rows[0].isdonaor,
+                isChildrensHome: result.rows[0].ischildrenshome,
+              },
               message: 'Login Successfully',
             });
           }
         } else {
           // if email does not exist
-          res.json({ status: false, message: 'Incorrect email!' });
+          res.json({ status: false, message: 'Invalid Username or password!' });
         }
       }
     );
