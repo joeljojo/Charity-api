@@ -4,15 +4,11 @@ const client = require('../Config/db');
 
 // Register Controller
 const registerUser = async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    isAdmin,
-    isDonor,
-    isChildrensHome,
-  } = req.body;
+  const { firstName, lastName, email, password, donor, childrensHome } =
+    req.body;
+  const isDonor = donor !== null;
+  const isAdmin = false;
+  const isChildrensHome = childrensHome !== null;
 
   // hash password using bcrypt
   const hash = bcrypt.hashSync(password, 10);
