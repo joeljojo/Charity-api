@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 const client = require('../Config/db');
 
 // Register Controller
@@ -14,7 +14,7 @@ const registerUser = async (req, res) => {
   const hash = bcrypt.hashSync(password, 10);
 
   // Generate userID
-  const userID = uuid();
+  const userID = uuidv4();
   // Register if user does not exist
   try {
     client.query(
@@ -110,7 +110,7 @@ const makeRequest = async (req, res) => {
     donorId,
   } = req.body;
   // generate requestId randomly
-  const requestID = uuid();
+  const requestID = uuidv4();
 
   try {
     client.query(
