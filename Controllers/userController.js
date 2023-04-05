@@ -172,7 +172,7 @@ const getDonors = async (req, res) => {
       `Select userid, firstname, lastname, email from users where isDonaor = true`,
       (error, result) => {
         if (error) throw error;
-        res.status(200).json(result.rows);
+        res.status(200).json({ status: true, result: result.rows });
       }
     );
   } catch (error) {
@@ -190,7 +190,7 @@ const myAllRequests = async (req, res) => {
       [userid],
       (error, result) => {
         if (error) throw error;
-        res.status(200).json(result.rows);
+        res.status(200).json({ result: result.rows, status: true });
       }
     );
   } catch (error) {
