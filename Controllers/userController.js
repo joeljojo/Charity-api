@@ -149,7 +149,7 @@ const adminRequests = async (req, res) => {
 
 // fetch donor requests
 const donorRequests = async (req, res) => {
-  const { donorId } = req.body;
+  const donorId = req.query.userID;
   try {
     client.query(
       `Select * from requests where isadminaproved = true and isdonorapproved = false and donorid =$1`,
@@ -182,8 +182,7 @@ const getDonors = async (req, res) => {
 
 // Get myRequests controller (requests made by childrens home)
 const myAllRequests = async (req, res) => {
-  const { userid } = req.body;
-
+  const userid = req.query.userID;
   try {
     client.query(
       `Select * from requests where childrenshomeid = $1`,
@@ -200,7 +199,7 @@ const myAllRequests = async (req, res) => {
 
 // Get Admin Approved requests controller
 const myAdminApprovedRequests = async (req, res) => {
-  const { userid } = req.body;
+  const userid = req.query.userID;
   try {
     client.query(
       `Select * from requests where isadminaproved = true and childrenshomeid = $1`,
@@ -217,7 +216,7 @@ const myAdminApprovedRequests = async (req, res) => {
 
 // Get Admin Rejected Requests controller
 const myAdminRejectedRequests = async (req, res) => {
-  const { userid } = req.body;
+  const userid = req.query.userID;
   try {
     client.query(
       `Select * from requests where isadminaproved = false and childrenshomeid = $1`,
@@ -234,7 +233,7 @@ const myAdminRejectedRequests = async (req, res) => {
 
 // Get Donor Approved requests controller
 const myDonorApprovedRequests = async (req, res) => {
-  const { userid } = req.body;
+  const userid = req.query.userID;
   try {
     client.query(
       `Select * from requests where isdonorapproved = true and childrenshomeid = $1`,
@@ -251,7 +250,7 @@ const myDonorApprovedRequests = async (req, res) => {
 
 // get Donor Rejected requests controller
 const myDonorRejectedRequests = async (req, res) => {
-  const { userid } = req.body;
+  const userid = req.query.userID;
   try {
     client.query(
       `Select * from requests where isadminaproved = true and isdonorapproved = false and childrenshomeid = $1`,
