@@ -206,7 +206,7 @@ const myAdminApprovedRequests = async (req, res) => {
       [userid],
       (error, result) => {
         if (error) throw error;
-        res.status(200).json(result.rows);
+        res.status(200).json({ result: result.rows, status: true });
       }
     );
   } catch (error) {
@@ -223,7 +223,7 @@ const myAdminRejectedRequests = async (req, res) => {
       [userid],
       (error, result) => {
         if (error) throw error;
-        res.status(200).json(result.rows);
+        res.status(200).json({ result: result.rows, status: true });
       }
     );
   } catch (error) {
@@ -240,7 +240,7 @@ const myDonorApprovedRequests = async (req, res) => {
       [userid],
       (error, result) => {
         if (error) throw error;
-        res.status(200).json(result.rows);
+        res.status(200).json({ result: result.rows, status: true });
       }
     );
   } catch (error) {
@@ -257,7 +257,7 @@ const myDonorRejectedRequests = async (req, res) => {
       [userid],
       (error, result) => {
         if (error) throw error;
-        res.status(200).json(result.rows);
+        res.status(200).json({ result: result.rows, status: true });
       }
     );
   } catch (error) {
