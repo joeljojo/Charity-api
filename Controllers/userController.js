@@ -138,10 +138,13 @@ const makeRequest = async (req, res) => {
 // fetch admin requests controller
 const adminRequests = async (req, res) => {
   try {
-    client.query(`Select * from requests`, (error, result) => {
-      if (error) throw error;
-      res.status(200).json(result.rows);
-    });
+    client.query(
+      `Select * from requests where isadminaproved = false and isdonorapproved = false`,
+      (error, result) => {
+        if (error) throw error;
+        res.status(200).json({ result: result.rows, status: true });
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -156,7 +159,7 @@ const donorRequests = async (req, res) => {
       [donorId],
       (error, result) => {
         if (error) throw error;
-        res.status(200).json(result.rows);
+        res.status(200).json({ result: result.rows, status: true });
       }
     );
   } catch (error) {
