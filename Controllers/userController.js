@@ -276,7 +276,7 @@ const adminRejectsRequest = async (req, res) => {
       `Update requests set isadminaproved = false where requestid=$1`,
       [requestId]
     );
-    res.status(201).json({ message: 'Created' });
+    res.status(201).json({ message: 'Created', status: true });
   } catch (error) {
     console.log(error);
   }
@@ -290,7 +290,7 @@ const adminApprovesRequest = async (req, res) => {
       `Update requests set isadminaproved = true where requestid=$1`,
       [requestId]
     );
-    res.status(201).json({ message: 'Created' });
+    res.status(201).json({ message: 'Created', status: true });
   } catch (error) {
     console.log(error);
   }
@@ -304,7 +304,7 @@ const donorApprovesRequest = async (req, res) => {
       `Update requests set isdonorapproved = true where requestid=$1`,
       [requestId]
     );
-    res.status(201).json({ message: 'Created' });
+    res.status(201).json({ message: 'Created', status: true });
   } catch (error) {
     console.log(error);
   }
@@ -318,7 +318,7 @@ const donorRejectsRequest = async (req, res) => {
       `Update requests set isdonorapproved = false where requestid=$1`,
       [requestId]
     );
-    res.status(201).json({ message: 'Created' });
+    res.status(201).json({ message: 'Created', status: true });
   } catch (error) {
     console.log(error);
   }
