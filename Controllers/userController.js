@@ -104,12 +104,12 @@ const makeRequest = async (req, res) => {
     numberOfChildren,
     location,
     amountRequired,
-    isDonorApproved,
-    isAdminApproved,
     childrensHomeId,
     donorId,
   } = req.body;
   // generate requestId randomly
+  const isDonorApproved = false;
+  const isAdminApproved = false;
   const requestID = uuidv4();
 
   try {
