@@ -82,14 +82,16 @@ class Mpesa {
         )
         .catch(console.log);
 
-      return res.send({
+      return res.json({
         success: true,
         message: data,
+        status: true,
       });
     } catch (err) {
-      return res.send({
+      return res.json({
         success: false,
         message: err.response.statusText,
+        status: false,
       });
     }
   }
