@@ -1,11 +1,13 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const client = require('../Config/db');
+const { registerSchema, loginSchema } = require('../Helpers/validator');
 
 // Register Controller
 const registerUser = async (req, res) => {
   const { firstName, lastName, email, password, donor, childrensHome } =
     req.body;
+  const data = req.body;
   const isDonor = donor !== null;
   const isAdmin = false;
   const isChildrensHome = childrensHome !== null;
@@ -15,6 +17,9 @@ const registerUser = async (req, res) => {
 
   // Generate userID
   const userID = uuidv4();
+
+  // Do validation
+  await registerSchema.validateAsync(data);
   // Register if user does not exist
   try {
     client.query(
@@ -50,6 +55,9 @@ const registerUser = async (req, res) => {
 // Login controller
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
+  const data = req.body;
+  // Do validation
+  await loginSchema.validateAsync(data);
 
   try {
     // if email exists and compare passwords
