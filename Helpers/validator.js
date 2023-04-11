@@ -2,7 +2,8 @@ const Joi = require('joi');
 
 // define  schema
 const registerSchema = Joi.object({
-  name: Joi.string().required(),
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
     .required(),

@@ -20,7 +20,12 @@ const registerUser = async (req, res) => {
 
   // Do validation
   try {
-    await registerSchema.validateAsync(data);
+    await registerSchema.validateAsync({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
     try {
       client.query(
         `Select * from users  where not exists (select * from users where email =$1)`,
