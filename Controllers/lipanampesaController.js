@@ -34,7 +34,8 @@ class Mpesa {
   // Lipanampesa Controller
   async onlineLipaNaMpesa(req, res) {
     const { token } = req;
-    const { Amount } = req.body;
+    const { Amount, phone } = req.body;
+
     const auth = `Bearer ${token}`;
 
     // get timestamp
@@ -50,9 +51,9 @@ class Mpesa {
     ).toString('base64');
     const transactionType = 'CustomerPayBillOnline'; // used to identify the transaction when sending request
     const amount = Amount; // Amount transacted
-    const partyA = process.env.PHONE_NUMBER; // Phone number sending the money
+    const partyA = phone; // Phone number sending the money
     const partyB = process.env.BUSINESS_SHORT_CODE; // orhanozation shortcode (Paybill)
-    const phoneNumber = process.env.PHONE_NUMBER; // mobile number to receive the stk Pin Prompt
+    const phoneNumber = phone; // mobile number to receive the stk Pin Prompt
     const callBackUrl = `${process.env.CALLBACK_URL}/lipa-na-mpesa-callback`; // receive notifications from M-Pesa API
     const accountReference = 'Lipa Charity'; // Identifies the transactions
     const transactionDescription = 'Mpesa Online Payment'; // Additional information

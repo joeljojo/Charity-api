@@ -7,7 +7,6 @@ const { registerSchema, loginSchema } = require('../Helpers/validator');
 const registerUser = async (req, res) => {
   const { firstName, lastName, email, password, donor, childrensHome } =
     req.body;
-  const data = req.body;
   const isDonor = donor !== null;
   const isAdmin = false;
   const isChildrensHome = childrensHome !== null;
