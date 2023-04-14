@@ -161,7 +161,7 @@ const makeRequest = async (req, res) => {
 const adminRequests = async (req, res) => {
   try {
     client.query(
-      `Select * from requests where isadminaproved = false and isdonorapproved = false`,
+      `Select * from requests where isadminaproved IS NULL`,
       (error, result) => {
         if (error) throw error;
         res.status(200).json({ result: result.rows, status: true });
@@ -177,7 +177,7 @@ const donorRequests = async (req, res) => {
   const donorId = req.query.userID;
   try {
     client.query(
-      `Select * from requests where isadminaproved = true and isdonorapproved = false and donorid =$1`,
+      `Select * from requests where isadminaproved = true and isdonorapproved IS NULL and donorid =$1`,
       [donorId],
       (error, result) => {
         if (error) throw error;
@@ -278,7 +278,7 @@ const myDonorRejectedRequests = async (req, res) => {
   const userid = req.query.userID;
   try {
     client.query(
-      `Select * from requests where isadminaproved = true and isdonorapproved = false and childrenshomeid = $1`,
+      `Select * from requests where isdonorapproved = false and childrenshomeid = $1`,
       [userid],
       (error, result) => {
         if (error) throw error;
