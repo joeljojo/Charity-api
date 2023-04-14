@@ -20,3 +20,9 @@ CREATE TABLE IF NOT EXISTS Requests(
 --Altered Requests table
 -- ALTER TABLE IF EXISTS Requests ALTER isDonorApproved set DEFAULT false
 -- ALTER TABLE IF EXISTS Requests ALTER isAdminAproved set DEFAULT false
+
+--Altered the Requests table
+-- ALTER TABLE IF EXISTS Requests ALTER isDonorApproved set DEFAULT null;
+-- ALTER TABLE IF EXISTS Requests ALTER isAdminAproved set DEFAULT null;
+-- ALTER TABLE IF EXISTS Requests ALTER COLUMN isDonorApproved DROP NOT NULL;
+-- ALTER TABLE IF EXISTS Requests ALTER COLUMN isAdminAproved DROP NOT NULL;

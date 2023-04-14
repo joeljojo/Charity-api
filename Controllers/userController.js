@@ -130,8 +130,8 @@ const makeRequest = async (req, res) => {
     donorId,
   } = req.body;
   // generate requestId randomly
-  const isDonorApproved = false;
-  const isAdminApproved = false;
+  const isDonorApproved = null;
+  const isAdminApproved = null;
   const requestID = uuidv4();
 
   try {
